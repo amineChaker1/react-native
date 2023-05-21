@@ -28,35 +28,44 @@ export default function List() {
   ]);
 
   return (
-    <View style={styles.container}>
-      <Header />
-      <Form todos={todos} />
-      <ScrollView>
-        {todos.map((todo) => (
-          <TouchableOpacity
-            onPress={() => handlePress(todo.index)}
-            key={todo.index}
-          >
-            <Text
-              key={todo.index}
-              className=" border border-purple-900 text-slate-900 mt-6 p-8 text-lg font-bold rounded-lg"
-            >
-              {todo.name}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+    <>
+      <View style={styles.container1}>
+        <Header />
+        <Form todos={todos} setTodos={setTodos} />
+      </View>
 
-      <StatusBar style="auto" />
-    </View>
+      <View style={styles.container}>
+        <ScrollView>
+          {todos.map((todo) => (
+            <TouchableOpacity
+              onPress={() => handlePress(todo.index)}
+              key={todo.index}
+            >
+              <Text
+                key={todo.index}
+                className=" border border-purple-900 text-slate-900 mt-6 p-8 text-lg font-bold rounded-lg"
+              >
+                {todo.name}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
+        <StatusBar style="auto" />
+      </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
+
+    paddingHorizontal: 20,
+  },
+  container1: {
+    backgroundColor: "#fff",
     marginTop: 40,
-    marginBottom: 40,
     paddingHorizontal: 20,
   },
 });

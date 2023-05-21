@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Text, TextInput, View } from "react-native";
-const Form = ({ todos }) => {
+import { Button, Text, TextInput, View } from "react-native";
+const Form = ({ todos, setTodos }) => {
   const [inputData, setInputData] = useState("");
-  const [newTodos, setTodos] = useState(todos);
+  const handleNewTodo = () => {
+    setTodos([{ name: inputData, index: Math.random() }, ...todos]);
+    console.log(todos);
+  };
 
   const handleChange = (e) => {
-    console.log(e);
+    setInputData(e);
   };
   return (
     <>
@@ -13,7 +16,12 @@ const Form = ({ todos }) => {
         <Text> Enter your Todo </Text>
         <TextInput
           onChangeText={(e) => handleChange(e)}
-          className="border border-purple-900 rounded-md"
+          className="border border-purple-900 rounded-md mb-3 p-2"
+        />
+        <Button
+          onPress={() => handleNewTodo()}
+          title="Add Todo"
+          color="purple"
         />
       </View>
     </>
