@@ -1,36 +1,56 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Button, Text, TextInput, View } from "react-native";
-
+import {
+  Button,
+  Keyboard,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 export default function App() {
-  const [counter, setCounter] = useState(0);
-  const handlePress = () => {
-    setCounter(counter + 1);
+  const [count, setCount] = useState(0);
+  const handleSub = () => {
+    setCount(count - 1);
   };
-  const handlePress2 = () => {
-    setCounter(counter - 1);
+  const handleAdding = () => {
+    setCount(count + 1);
+  };
+  const handleChange = (e) => {
+    setCount(parseInt(e));
   };
   return (
-    <View className="flex-1 justify-center items-center">
-      <View>
-        <Text>Enter how many apps :</Text>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View className="pt-12 justify-center items-center">
+        <Text className="text-blue-800">
+          Enter how many apps you want to make :
+        </Text>
         <TextInput
-          keyboardType="numeric"
-          onChangeText={(e) => setCounter(e)}
-          className="border border-blue-700 m-3 text-center"
-          placeholder="e.g. 5"
+          onChangeText={(e) => handleChange(e)}
+          className="border rounded border-blue-800 w-9/12 px-7 mt-2"
         />
+        <View className="flex flex-row w-full justify-evenly px-10 my-2">
+          <View className="flex flex-row items-center">
+            <Button
+              onPress={() => handleSub()}
+              title="Did One"
+              className="mt-2 bg-blue-800"
+            />
+            <AntDesign name="pluscircleo" size={18} color="black" />
+          </View>
+          <View className="flex flex-row items-center">
+            <Button
+              onPress={() => handleAdding()}
+              title="Add One"
+              className="mt-2"
+            />
+            <AntDesign name="minuscircleo" size={18} color="black" />
+          </View>
+        </View>
+        <Text>Youve made {count} </Text>
+        <StatusBar style="auto" />
       </View>
-      <Text className="text-green-900">
-        {" "}
-        Hi this is the app number {counter}{" "}
-      </Text>
-      <View className="mt-3">
-        <Button onPress={handlePress} title="+1" />
-        <Button onPress={handlePress2} title="-1" />
-      </View>
-
-      <StatusBar style="auto" />
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
